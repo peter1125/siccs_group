@@ -88,7 +88,7 @@ ag_top_terms %>%
     geom_col(show.legend = FALSE) +
     facet_wrap(~ topic, scales = "free") +
     coord_flip()
-
+ggsave("agenda_topics.png", width = 12, height = 10, units = "cm")
 
 processed <- textProcessor(dd$text, metadata = dd)
 out <- prepDocuments(processed$documents, processed$vocab, processed$meta)
@@ -99,11 +99,17 @@ First_STM <- stm(documents = out$documents, vocab = out$vocab,
                  K = 7, prevalence =~ docdate + docname ,
                  max.em.its = 75, data = out$meta,
                  init.type = "Spectral", verbose = FALSE)
+
+png(filename = "agenda_stm_plot.png", height = 900, width = 1600)
 plot(First_STM)
+dev.off()
+
 findThoughts(First_STM, texts = dd$text,
              n = 1, topics = c(1,6))
-
 findingk <- searchK(out$documents, out$vocab, K = c(3:10),
                     prevalence =~ docdate + docname,
                     data = meta, verbose=FALSE)
+
+png(filename = "agenda_stm_k_checks.png", height = 900, width = 1600)
 plot(findingk)
+dev.off()
