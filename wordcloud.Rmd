@@ -1,0 +1,25 @@
+---
+title: "Word Clouds"
+author: "Leah Castleberry, Peter Choi, Ole Hexel, Ikiltezilani Mazehuani, Richard Shafranek"
+date: "June 27, 2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bsselectR)
+library(stringr)
+# put plots in a subdirectory called "plots"
+plots <- paste0(list.files("plots", full.names = TRUE))
+# Name plots according to the file's basename. Requires _meaningful_ names.
+names(plots) <- str_replace_all(plots, 
+                                c("\\.png" = "", 
+                                  "plots/" = ""))
+```
+
+# Pick a date to see a word cloud of City Council Meeting Transcripts.
+
+```{r choice, echo = FALSE}
+bsselect(plots, type = "img", selected = "placeholder",
+         live_search = TRUE, show_tick = TRUE)
+```
