@@ -118,7 +118,8 @@ p <- ggplot(attendance_v2, aes(y = name, x = date)) +
          x = "Date",
          y = "Alderman",
          fill = "Has attended") +
-    scale_fill_discrete(labels = c("no", "yes")) +
+    scale_fill_discrete(labels = c("no", "yes"),
+                        guide = FALSE) +
     theme_minimal() +
     theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
